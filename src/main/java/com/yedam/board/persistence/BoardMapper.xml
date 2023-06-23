@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yedam.board.persistence.BoardMapper">
+	<select id="boardList" parameterType="int"
+		resultType="com.yedam.board.vo.BoardVO">
+		select *
+		from (
+			select ROWNUM rn, a.*
+			from(
+				select * from tbl_board
+				order by brd_no desc
+				) a
+			) b
+		where b.rn > (#{page} -1) * 10
+		<![CDATA[
+		and b.rn <= #{page} * 10
+		]]>
+	</select>
+	<select id="totalCnt">
+	select count(1) from tbl_board
+	</select>
+	
+	<select id="selectBoard" parameterType="long">
+	 select * from tbl_board where brd_no = #{bno}
+	</select>
+	<update id="updateCnt" parameterType="long">
+	update tbl_board set click_cnt=click_cnt+1 where brd_no = #{bno}
+	</update>
+	<delete id="deleteBoard" parameterType="long">
+	delete from tbl_board where brd_no = #{bno}
+	</delete>
+	<update id="updateBoard" parameterType="board">
+	update tbl_board
+	set	 brd_title = #{brdTitle},
+			 brd_content = #{brdContent}
+	where  brd_no = #{brdNo}
+	</update>
+	<insert id="insertBoard" parameterType="board">
+	insert into tbl_board(brd_no, brd_title, brd_writer, brd_content)
+	values (board_seq.nextval,#{brdTitle},#{brdWriter},#{brdContent})
+	</insert>
+</mapper>
