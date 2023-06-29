@@ -1,4 +1,4 @@
-package com.yedam;
+package com.yedam.board.control;
 
 import java.io.IOException;
 

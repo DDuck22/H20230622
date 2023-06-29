@@ -15,25 +15,37 @@
 <link href="bootstrap/css/styles.css" rel="stylesheet" />
 </head>
 <body>
+<%
+String logId = (String) session.getAttribute("loginId");
+String logName = (String) session.getAttribute("loginName");
+
+%>
 	<div class="d-flex" id="wrapper">
 		<!-- Sidebar-->
 		<div class="border-end bg-white" id="sidebar-wrapper">
-			<div class="sidebar-heading border-bottom bg-light">Start
-				Bootstrap</div>
+		<%
+		if(logId==null){
+		%>
+			<div class="sidebar-heading border-bottom bg-light">어서오세요</div>
+		<%} else {%>
+			<div class="sidebar-heading border-bottom bg-light"><%=logName %></div>
+		<%} %>
 			<div class="list-group list-group-flush">
-				<a
-					class="list-group-item list-group-item-action list-group-item-light p-3"
-					href="boardForm.do">등록화면</a> <a
-					class="list-group-item list-group-item-action list-group-item-light p-3"
-					href="#!">Shortcuts</a> <a
-					class="list-group-item list-group-item-action list-group-item-light p-3"
-					href="#!">Overview</a> <a
-					class="list-group-item list-group-item-action list-group-item-light p-3"
-					href="#!">Events</a> <a
-					class="list-group-item list-group-item-action list-group-item-light p-3"
-					href="#!">Profile</a> <a
-					class="list-group-item list-group-item-action list-group-item-light p-3"
-					href="#!">Status</a>
+				<a	class="list-group-item list-group-item-action list-group-item-light p-3" href="boardForm.do">등록화면</a> 
+				<a class="list-group-item list-group-item-action list-group-item-light p-3" href="boardList.do">목록으로</a> 
+				<%
+				if (logId == null){
+				%>
+				<a class="list-group-item list-group-item-action list-group-item-light p-3" href="memberLoginForm.do">로그인</a>
+				<a class="list-group-item list-group-item-action list-group-item-light p-3" href="memberJoinForm.do">회원가입</a>  				
+				<%
+				} else {
+				%>
+				<a	class="list-group-item list-group-item-action list-group-item-light p-3" href="memberLogout.do">로그아웃</a> 
+				<a class="list-group-item list-group-item-action list-group-item-light p-3" href="memberInfo.do">내 정보</a> 
+				<%} %>
+				<a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Profile</a> 
+				<a class="list-group-item list-group-item-action list-group-item-light p-3" href="#!">Status</a>
 			</div>
 		</div>
 		<!-- Page content wrapper-->

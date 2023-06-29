@@ -8,6 +8,7 @@
 	</settings>
 	<typeAliases>
 		<typeAlias alias="board" type="com.yedam.board.vo.BoardVO" />
+		<typeAlias alias="member" type="com.yedam.member.vo.MemberVO" />
 	</typeAliases>
 
 	<environments default="development">
@@ -24,5 +25,7 @@
 	</environments>
 	<mappers>
 		<mapper resource="com/yedam/board/persistence/BoardMapper.xml" />
+		<mapper
+			resource="com/yedam/member/persistence/MemberMapper.xml" />
 	</mappers>
 </configuration>
